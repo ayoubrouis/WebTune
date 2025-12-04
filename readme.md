@@ -162,7 +162,7 @@ Dans le popup de l'extension :
 
 ### Comment ça fonctionne ?
 
-1. **Activation** : Appuyez sur `Alt+D` pour activer le mode déplacement
+1. **Activation** : Appuyez sur `Ctrl+Q` pour activer le mode déplacement
 2. **Survol** : Les éléments déplaçables s'affichent avec une bordure pointillée teal
 3. **Sélection** : Cliquez et maintenez sur un élément pour le saisir (curseur devient "grabbing")
 4. **Déplacement** : Déplacez la souris pour repositionner l'élément en temps réel
@@ -180,7 +180,7 @@ Dans le popup de l'extension :
 
 ```
 Page d'accueil d'un site :
-1. Appuyez Alt+D
+1. Appuyez Ctrl+Q
 2. Survolez une banneau publicitaire → bordure teal apparaît
 3. Cliquez et traînez-le vers le bas de la page
 4. Relâchez la souris → position sauvegardée

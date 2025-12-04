@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenue sur CleanWeb !</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy-dark: #0C2B4E;
+      --navy: #1A3D64;
+      --teal: #1D546C;
+      --light: #F4F4F4;
+      --accent: #3B8EA5;
+      --accent-light: #5AAFCA;
+      --glass: rgba(244, 244, 244, 0.05);
+      --glass-border: rgba(244, 244, 244, 0.1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--navy-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--light);
+    }
+
+    /* Animated gradient background */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(29, 84, 108, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(59, 142, 165, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(26, 61, 100, 0.3) 0%, transparent 50%);
+      animation: gradientShift 15s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { 
+        transform: scale(1) rotate(0deg);
+      }
+      50% { 
+        transform: scale(1.1) rotate(5deg);
+      }
+    }
+
+    /* Floating 3D orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(29, 84, 108, 0.5) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      animation: orbFloat1 20s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(59, 142, 165, 0.4) 0%, transparent 70%);
+      bottom: -50px;
+      left: -50px;
+      animation: orbFloat2 18s ease-in-out infinite;
+    }
+
+    .orb-3 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(26, 61, 100, 0.4) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      animation: orbFloat3 22s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(-50px, 50px) scale(1.1); }
+      50% { transform: translate(-30px, 100px) scale(0.9); }
+      75% { transform: translate(30px, 50px) scale(1.05); }
+    }
+
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(60px, -40px) rotate(120deg); }
+      66% { transform: translate(30px, 30px) rotate(240deg); }
+    }
+
+    @keyframes orbFloat3 {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-30%, -70%) scale(1.3); }
+    }
+
+    /* Grid pattern overlay */
+    .grid-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(244, 244, 244, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 244, 244, 0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Content wrapper */
+    .content {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    /* Hero section with 3D card */
+    .hero-card {
+      width: 100%;
+      max-width: 900px;
+      background: var(--glass);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      animation: heroEntry 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      box-shadow: 
+        0 50px 100px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(244, 244, 244, 0.05) inset;
+    }
+
+    @keyframes heroEntry {
+      0% {
+        opacity: 0;
+        transform: translateY(100px) rotateX(10deg) scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0) scale(1);
+      }
+    }
+
+    .hero-card:hover {
+      box-shadow: 
+        0 60px 120px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(244, 244, 244, 0.1) inset;
+    }
+
+    /* Hero header */
+    .hero {
+      position: relative;
+      padding: 80px 60px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, 
+        rgba(29, 84, 108, 0.3) 0%, 
+        rgba(59, 142, 165, 0.2) 50%,
+        rgba(26, 61, 100, 0.2) 100%);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-3d {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--accent) 100%);
+      border-radius: 32px;
+      margin-bottom: 32px;
+      font-size: 56px;
+      box-shadow: 
+        0 20px 60px rgba(29, 84, 108, 0.6),
+        inset 0 -5px 20px rgba(0, 0, 0, 0.2),
+        inset 0 5px 20px rgba(255, 255, 255, 0.1);
+      animation: logo3D 6s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+
+    @keyframes logo3D {
+      0%, 100% { 
+        transform: rotateY(0deg) rotateX(0deg) scale(1);
+        box-shadow: 0 20px 60px rgba(29, 84, 108, 0.6);
+      }
+      25% { 
+        transform: rotateY(15deg) rotateX(-5deg) scale(1.05);
+        box-shadow: -20px 20px 60px rgba(59, 142, 165, 0.6);
+      }
+      50% { 
+        transform: rotateY(0deg) rotateX(5deg) scale(1.02);
+        box-shadow: 0 30px 80px rgba(59, 142, 165, 0.5);
+      }
+      75% { 
+        transform: rotateY(-15deg) rotateX(-5deg) scale(1.05);
+        box-shadow: 20px 20px 60px rgba(29, 84, 108, 0.6);
+      }
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--light) 0%, var(--accent-light) 50%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleShimmer 3s linear infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes titleShimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero .subtitle {
+      font-size: 22px;
+      color: rgba(244, 244, 244, 0.8);
+      font-weight: 400;
+      animation: subtitleFade 1s ease-out 0.3s forwards;
+      opacity: 0;
+    }
+
+    @keyframes subtitleFade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Features section */
+    .features-section {
+      padding: 60px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      position: relative;
+      background: rgba(244, 244, 244, 0.03);
+      border: 1px solid rgba(244, 244, 244, 0.08);
+      border-radius: 24px;
+      padding: 32px;
+      transform-style: preserve-3d;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: default;
+      overflow: hidden;
+      animation: featureEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.2s; }
+    .feature-card:nth-child(2) { animation-delay: 0.3s; }
+    .feature-card:nth-child(3) { animation-delay: 0.4s; }
+    .feature-card:nth-child(4) { animation-delay: 0.5s; }
+    .feature-card:nth-child(5) { animation-delay: 0.6s; }
+    .feature-card:nth-child(6) { animation-delay: 0.7s; }
+
+    @keyframes featureEntry {
+      from {
+        opacity: 0;
+        transform: translateY(40px) rotateX(-10deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--accent), var(--accent-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s;
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px) rotateX(5deg) scale(1.02);
+      border-color: rgba(244, 244, 244, 0.2);
+      box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(59, 142, 165, 0.1);
+    }
+
+    .feature-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--accent) 100%);
+      border-radius: 20px;
+      font-size: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(29, 84, 108, 0.4);
+      transition: all 0.4s;
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1) rotate(-5deg);
+      box-shadow: 0 15px 40px rgba(59, 142, 165, 0.5);
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--light);
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(244, 244, 244, 0.6);
+    }
+
+    /* Steps section */
+    .steps-section {
+      background: rgba(244, 244, 244, 0.02);
+      border-top: 1px solid rgba(244, 244, 244, 0.05);
+      border-bottom: 1px solid rgba(244, 244, 244, 0.05);
+      padding: 60px;
+    }
+
+    .steps-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 48px;
+      background: linear-gradient(135deg, var(--light) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 24px;
+      background: rgba(244, 244, 244, 0.03);
+      border: 1px solid rgba(244, 244, 244, 0.08);
+      border-radius: 20px;
+      transform-style: preserve-3d;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: stepSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+
+    .step:nth-child(1) { animation-delay: 0.6s; }
+    .step:nth-child(2) { animation-delay: 0.7s; }
+    .step:nth-child(3) { animation-delay: 0.8s; }
+    .step:nth-child(4) { animation-delay: 0.9s; }
+
+    @keyframes stepSlide {
+      from {
+        opacity: 0;
+        transform: translateX(-50px) rotateY(-10deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+      }
+    }
+
+    .step:hover {
+      transform: translateX(15px) scale(1.02);
+      border-color: var(--accent);
+      box-shadow: 0 10px 40px rgba(59, 142, 165, 0.2);
+    }
+
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--accent) 100%);
+      border-radius: 16px;
+      font-size: 24px;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(29, 84, 108, 0.5);
+      transition: all 0.4s;
+    }
+
+    .step:hover .step-number {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .step-text {
+      font-size: 16px;
+      color: rgba(244, 244, 244, 0.9);
+      line-height: 1.6;
+    }
+
+    .step-text strong {
+      color: var(--light);
+    }
+
+    .shortcut {
+      display: inline-block;
+      background: rgba(59, 142, 165, 0.2);
+      border: 1px solid var(--accent);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-light);
+      margin: 0 4px;
+    }
+
+    /* CTA section */
+    .cta-section {
+      padding: 60px;
+      text-align: center;
+    }
+
+    .cta-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 24px 56px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--accent) 100%);
+      color: var(--light);
+      text-decoration: none;
+      border: none;
+      border-radius: 20px;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 
+        0 20px 50px rgba(29, 84, 108, 0.5),
+        inset 0 -5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 5px 15px rgba(255, 255, 255, 0.1);
+      animation: ctaPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes ctaPulse {
+      0%, 100% { 
+        box-shadow: 0 20px 50px rgba(29, 84, 108, 0.5);
+      }
+      50% { 
+        box-shadow: 0 25px 60px rgba(59, 142, 165, 0.6);
+      }
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-8px) scale(1.05) rotateX(5deg);
+      box-shadow: 0 30px 70px rgba(59, 142, 165, 0.5);
+    }
+
+    .cta-button:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    .cta-button .emoji {
+      font-size: 24px;
+      animation: ctaEmoji 2s ease-in-out infinite;
+    }
+
+    @keyframes ctaEmoji {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.2) rotate(-10deg); }
+      75% { transform: scale(1.1) rotate(10deg); }
+    }
+
+    /* Footer */
+    .footer {
+      padding: 32px 60px;
+      text-align: center;
+      border-top: 1px solid rgba(244, 244, 244, 0.05);
+    }
+
+    .footer p {
+      font-size: 14px;
+      color: rgba(244, 244, 244, 0.5);
+      line-height: 1.8;
+    }
+
+    .footer strong {
+      color: rgba(244, 244, 244, 0.7);
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(244, 244, 244, 0.3);
+      border-radius: 50%;
+      animation: particleRise 20s linear infinite;
+    }
+
+    @keyframes particleRise {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 50px 30px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero .subtitle {
+        font-size: 18px;
+      }
+
+      .features-section,
+      .steps-section,
+      .cta-section {
+        padding: 40px 24px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .logo-3d {
+        width: 90px;
+        height: 90px;
+        font-size: 42px;
+      }
+
+      .steps-title {
+        font-size: 28px;
+      }
+
+      .cta-button {
+        padding: 20px 40px;
+        font-size: 18px;
+      }
+    }
+
+    /* Mouse trail effect canvas */
+    #mouseTrail {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background layers -->
+  <div class="bg-gradient"></div>
+  <div class="grid-pattern"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="particles" id="particles"></div>
+  <canvas id="mouseTrail"></canvas>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="hero-card">
+      <div class="hero">
+        <div class="hero-content">
+          <div class="logo-3d">🎯</div>
+          <h1>Bienvenue sur CleanWeb !</h1>
+          <p class="subtitle">Le web comme VOUS l'entendez, enfin !</p>
+        </div>
+      </div>
+
+      <div class="features-section">
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🚫</div>
+            <h3>Masquez les éléments indésirables</h3>
+            <p>Bannières, pop-ups, publicités... Un simple clic et ils disparaissent pour toujours de vos sites préférés.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📐</div>
+            <h3>Agrandissez le contenu important</h3>
+            <p>Mettez en avant ce qui compte vraiment. Agrandissez articles, vidéos, ou tout autre élément essentiel.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">↔️</div>
+            <h3>Déplacez les éléments</h3>
+            <p>Réorganisez la page selon vos préférences. Glissez-déposez les éléments où vous voulez.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⬚</div>
+            <h3>Multi-sélection avancée</h3>
+            <p>Dessinez un rectangle pour sélectionner plusieurs éléments et les masquer ou déplacer ensemble.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">💾</div>
+            <h3>Sauvegarde automatique</h3>
+            <p>Vos modifications sont mémorisées par site. Chaque visite retrouve votre configuration personnalisée.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Ultra rapide et intuitif</h3>
+            <p>Tous les modes activables en un clic depuis le popup. Interface simple et efficace !</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-section">
+        <h2 class="steps-title">🚀 Les 3 modes de CleanWeb</h2>
+        
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">✏️</div>
+            <div class="step-text">
+              <strong>Mode Édition</strong> <span class="shortcut">Ctrl+E</span> — Survolez et cliquez pour masquer. <strong>Shift+Clic</strong> pour agrandir un élément.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">📐</div>
+            <div class="step-text">
+              <strong>Agrandir un élément</strong> — <strong>Shift+Clic</strong> sur un élément en mode édition pour l'agrandir. <em style="opacity: 0.7;">(Activez d'abord le mode édition)</em>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">↔️</div>
+            <div class="step-text">
+              <strong>Mode Déplacement</strong> <span class="shortcut">Ctrl+Q</span> — Glissez-déposez les éléments pour les repositionner.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">⬚</div>
+            <div class="step-text">
+              <strong>Mode Multi-sélection</strong> <span class="shortcut">Ctrl+M</span> — Dessinez un rectangle pour sélectionner et agir sur plusieurs éléments.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">💾</div>
+            <div class="step-text">
+              <strong>Sauvegarde automatique</strong> — Toutes vos modifications sont sauvegardées et restaurées à chaque visite !
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <button class="cta-button" id="ctaButton">
+          <span class="emoji">✨</span>
+          <span>C'est parti !</span>
+        </button>
+      </div>
+
+      <div class="footer">
+        <p>
+          💡 <strong>Astuce :</strong> Vous pouvez réinitialiser un site à tout moment depuis le popup de l'extension
+        </p>
+        <p style="margin-top: 12px; opacity: 0.6;">
+          Fait avec ❤️ pour Platon Formation
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="welcome.js"></script>
+</body>
+</html>

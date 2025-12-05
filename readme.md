@@ -1,4 +1,4 @@
-# 🎯 CleanWeb - Extension de Nettoyage Web
+# 🎯 WebTune - Extension de Nettoyage Web
 
 > **Nettoyez le web comme VOUS l'entendez !**
 
@@ -38,7 +38,7 @@ Une extension de navigateur puissante qui permet de masquer ou agrandir les él�
 1. **Téléchargez les fichiers**
 
    ```
-   cleanweb/
+   WebTune/
    ├── manifest.json
    ├── background.js
    ├── content.js
@@ -61,7 +61,7 @@ Une extension de navigateur puissante qui permet de masquer ou agrandir les él�
    - Ouvrez Chrome et allez sur `chrome://extensions/`
    - Activez le "Mode développeur" (coin supérieur droit)
    - Cliquez sur "Charger l'extension non empaquetée"
-   - Sélectionnez le dossier `cleanweb/`
+   - Sélectionnez le dossier `WebTune/`
    - L'extension apparaît dans votre barre d'outils !
 
 ### Firefox
@@ -110,7 +110,7 @@ Une extension de navigateur puissante qui permet de masquer ou agrandir les él�
 
 1. **Activez le mode édition**
 
-   - Cliquez sur l'icône CleanWeb dans votre navigateur
+   - Cliquez sur l'icône WebTune dans votre navigateur
    - Cliquez sur "Activer le mode édition"
    - Ou utilisez le raccourci `Ctrl+E` (ou `Cmd+E` sur Mac)
 
@@ -171,7 +171,7 @@ Dans le popup de l'extension :
 ### Caractéristiques
 
 - **Positioning Automatique** : Les éléments passent en `position: fixed` pour permettre le déplacement libre
-- **Persistance** : Les positions sont sauvegardées par domaine (clé : `cleanweb-drag-{domaine}`)
+- **Persistance** : Les positions sont sauvegardées par domaine (clé : `WebTune-drag-{domaine}`)
 - **Visual Feedback** : L'élément en cours de déplacement a une ombre et une outline visible
 - **Sauvegarde Auto** : Chaque position relâchée est immédiatement sauvegardée dans le stockage Chrome
 - **Multi-éléments** : Vous pouvez déplacer plusieurs éléments différents sur la même page
@@ -284,7 +284,7 @@ Les données sont stockées via `chrome.storage.local` avec cette structure :
 
 ```javascript
 {
-  "cleanweb-drag-example.com": {
+  "WebTune-drag-example.com": {
     "div.banner": {
       "left": "100px",
       "top": "200px",
@@ -322,11 +322,11 @@ L'extension génère des sélecteurs CSS intelligents et robustes :
 
 **Attributs de Suivi**
 
-- `data-cleanweb-hidden` - Marque les éléments masqués
-- `data-cleanweb-enlarged` - Marque les éléments agrandis
-- `data-cleanweb-moved` - Marque les éléments déplacés
-- `data-cleanweb-selected` - Marque les éléments sélectionnés (multi-select)
-- `data-cleanweb-highlight` - Marque les éléments en surbrillance
+- `data-WebTune-hidden` - Marque les éléments masqués
+- `data-WebTune-enlarged` - Marque les éléments agrandis
+- `data-WebTune-moved` - Marque les éléments déplacés
+- `data-WebTune-selected` - Marque les éléments sélectionnés (multi-select)
+- `data-WebTune-highlight` - Marque les éléments en surbrillance
 - `data-draggable` - Indique qu'un élément peut être dragué
 
 **Styles Dynamiques**
@@ -451,7 +451,6 @@ Toutes ces données restent **locales et privées** sur votre navigateur.
 - [ ] Synchronisation cloud (optionnelle et sécurisée)
 - [ ] Support des regex pour les sélecteurs avancés
 - [ ] Historique des modifications avec undo/redo
-- [ ] Thèmes d'interface (clair/sombre)
 - [ ] Interface des paramètres améliorée
 
 ---
@@ -465,7 +464,7 @@ Créé pour Platon Formation - Challenge "Nettoyez le web comme VOUS l'entendez 
 
 ## 🤝 Contribution
 
-Pour améliorer CleanWeb :
+Pour améliorer WebTune :
 
 1. Testez sur différents sites
 2. Signalez les bugs rencontrés
@@ -484,4 +483,4 @@ Pour toute question ou problème :
 
 ---
 
-**Fait avec ❤️ pour un web plus propre et plus personnel !**"# CleanWeb01"
+**Fait avec ❤️ pour un web plus propre et plus personnel !**"# WebTune01"
